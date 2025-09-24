@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore - Teléfonos y Accesorios Premium</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/icons8-teléfono-inteligente-24.png" type="image/x-icon">
+
+  <style>
+    :root {
+      --primary-blue: #007AFF;
+      --dark-gray: #1D1D1F;
+      --light-gray: #F5F5F7;
+      --text-gray: #6E6E73;
+      --white: #FFFFFF;
+      --success-green: #34C759;
+      --warning-orange: #FF9500;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--dark-gray);
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar-custom {
+      backdrop-filter: saturate(180%) blur(20px);
+      background-color: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--primary-blue) !important;
+    }
+
+    .nav-link {
+      color: var(--dark-gray) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-blue) !important;
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      margin-top: 76px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      z-index: 2;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary-custom {
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-right: 15px;
+    }
+
+    .btn-primary-custom:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary-custom {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 13px 33px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary-custom:hover {
+      background: white;
+      color: var(--primary-blue);
+    }
+
+    /* Services */
+    .services-section {
+      padding: 120px 0;
+      background: white;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+
+    .service-card.animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-icon {
+      font-size: 3.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Gallery */
+    .gallery-section {
+      padding: 120px 0;
+      background: var(--light-gray);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .gallery-item {
+      border-radius: 20px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item.animate {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+    }
+
+    .gallery-item img {
+      width: 90%;
+      height: 310px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-content {
+      padding: 30px;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 15px;
+    }
+
+    .btn-shop {
+      background: var(--primary-blue);
+      color: white;
+      border-radius: 25px;
+      padding: 10px 25px;
+    }
+
+    /* Features */
+    .features-section {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      padding: 15px 0;
+      border-bottom: 1px solid #e9ecef;
+      padding-left: 40px;
+      position: relative;
+    }
+
+    .features-list li:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success-green);
+    }
+
+    /* Pricing */
+    .pricing-section {
+      padding: 120px 0;
+      background: var(--light-gray);
+    }
+
+    .table-custom {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Contact */
+    .contact-section {
+      padding: 120px 0;
+      background: white;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-gray);
+      color: white;
+      padding: 80px 0 40px;
+    }
+
+    .footer h5 {
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    .social-icons a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-blue);
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: white;
+      color: var(--primary-blue);
+    }
+
+    /* Sidebar Redes Sociales */
+    .social-sidebar {
+      position: fixed;
+      top: 40%;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      z-index: 2000;
+    }
+
+    .social-sidebar a {
+      background: var(--primary-blue);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
+
+    .social-sidebar a:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateX(5px);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .scroll-animate.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Redes Sociales Sidebar -->
+  <div class="social-sidebar">
+    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://wa.me/573000000000" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div class="container">
+        <a class="navbar-brand" href="#inicio"><i class="fas fa-mobile-alt"></i> TechStore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#precios">Precios</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="hero-content">
+            <h1>La Tecnología en tus Manos</h1>
+            <p>Descubre los últimos smartphones y accesorios premium con la mejor calidad.</p>
+            <a href="#productos" class="btn-primary-custom">Ver Productos</a>
+            <a href="#contacto" class="btn-secondary-custom">Contáctanos</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <i class="fas fa-mobile-alt" style="font-size: 12rem; color: rgba(255,255,255,0.3);"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="services-section">
+    <div class="container text-center">
+      <h2 class="scroll-animate">Nuestros Servicios</h2>
+      <div class="row mt-5">
+        <div class="col-lg-4 mb-4">
+          <div class="service-card"><i class="fas fa-shipping-fast service-icon"></i>
+            <h3>Envío Gratis</h3>
+            <p>En compras mayores a $200.000.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="service-card"><i class="fas fa-tools service-icon"></i>
+            <h3>Soporte Técnico</h3>
+            <p>Reparación y configuración de dispositivos.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <div class="service-card"><i class="fas fa-shield-alt service-icon"></i>
+            <h3>Garantía Total</h3>
+            <p>Protección contra daños por 2 años.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos -->
+  <section id="productos" class="gallery-section">
+    <div class="container text-center">
+      <h2 class="scroll-animate">Nuestros Productos</h2>
+      <div class="gallery-grid">
+        <article class="gallery-item"><img src="img/15pro.png" alt="iPhone 15 Pro">
+          <div class="gallery-content">
+            <h4>iPhone 15 Pro</h4>
+            <p>Chip A17 Pro y cámara profesional.</p>
+            <div class="price">$4.299.000</div><button class="btn btn-shop">Comprar</button>
+          </div>
+        </article>
+        <article class="gallery-item"><img src="img/samsung.png" alt="Samsung Galaxy S24">
+          <div class="gallery-content">
+            <h4>Samsung Galaxy S24</h4>
+            <p>AI integrada y cámaras avanzadas.</p>
+            <div class="price">$3.899.000</div><button class="btn btn-shop">Comprar</button>
+          </div>
+        </article>
+        <article class="gallery-item"><img src="img/airpods.png" alt="AirPods Pro 2">
+          <div class="gallery-content">
+            <h4>AirPods Pro 2</h4>
+            <p>Cancelación activa de ruido.</p>
+            <div class="price">$899.000</div><button class="btn btn-shop">Comprar</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3 class="scroll-animate">¿Por qué elegirnos?</h3>
+          <ul class="features-list scroll-animate">
+            <li>Productos originales</li>
+            <li>Precios competitivos</li>
+            <li>Soporte 24/7</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="scroll-animate">Marcas</h3>
+          <ol class="features-list scroll-animate">
+            <li>Apple</li>
+            <li>Samsung</li>
+            <li>Google</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios -->
+  <section id="precios" class="pricing-section">
+    <div class="container text-center">
+      <h2 class="scroll-animate">Comparación de Precios</h2>
+      <div class="table-responsive mt-4">
+        <table class="table table-custom">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Regular</th>
+              <th>TechStore</th>
+              <th>Ahorro</th>
+              <th>Disponibilidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>iPhone 15 Pro</td>
+              <td><s>$4.599.000</s></td>
+              <td style="color:green;">$4.299.000</td>
+              <td style="color:orange;">$300.000</td>
+              <td><span class="badge bg-success">En stock</span></td>
+            </tr>
+            <tr>
+              <td>Galaxy S24</td>
+              <td><s>$4.199.000</s></td>
+              <td style="color:green;">$3.899.000</td>
+              <td style="color:orange;">$300.000</td>
+              <td><span class="badge bg-success">En stock</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="contact-section">
+    <div class="container">
+      <div class="form-container scroll-animate">
+        <form>
+          <div class="row">
+            <div class="col-md-6 mb-3"><label class="form-label">Nombre</label><input type="text" class="form-control" required></div>
+            <div class="col-md-6 mb-3"><label class="form-label">Correo</label><input type="email" class="form-control" required></div>
+            <div class="col-12 mb-3"><label class="form-label">Teléfono</label><input type="tel" class="form-control" required></div>
+            <div class="col-12 mb-3"><label class="form-label">Mensaje</label><textarea class="form-control" rows="5" required></textarea></div>
+            <div class="col-12 text-center"><button type="submit" class="btn btn-primary-custom">Enviar</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <h5>TechStore</h5>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p class="mt-3">&copy; 2025 TechStore - Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const scrollElements = document.querySelectorAll('.scroll-animate, .service-card, .gallery-item');
+    const scrollInView = (el) => el.getBoundingClientRect().top <= (window.innerHeight - 100);
+    const animateOnScroll = () => { scrollElements.forEach(el => { if (scrollInView(el)) el.classList.add('animate'); }); };
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+  </script>
+</body>
+</html>
